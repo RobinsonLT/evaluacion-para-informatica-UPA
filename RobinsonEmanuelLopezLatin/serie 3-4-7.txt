@@ -1,0 +1,31 @@
+***** SERIE 4 *****
+
+//Creamos la base de datos llamada "evaluacion_robinson"
+CREATE DATABASE `evaluacion_robinson` /*!40100 DEFAULT CHARACTER SET utf8mb4 */
+
+//Creamos la tabla "usuario"
+CREATE TABLE `usuario` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `nombre` varchar(200) NOT NULL,
+ `fecha` datetime NOT NULL,
+ `telefono` int(11) NOT NULL,
+ `correo` varchar(100) NOT NULL,
+ `creacion` datetime NOT NULL,
+ `EstadoUsuarioid` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+//Creamos la tabla "EstadoUsuario"
+CREATE TABLE `estadousuario` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `titulo` varchar(20) NOT NULL,
+ `clave` varchar(50) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+
+//agregamos 2 elementos a la tabla de "EstadoUsuario" que seran los estados predeterminados
+INSERT INTO `estadousuario` (`id`, `titulo`, `clave`) VALUES (NULL, 'Activo', 'activo'), (NULL, 'Baja Permanente', 'baja')
+
+
+***** SERIE 4 *****
