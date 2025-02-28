@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="esp">
+    <head>        
+        <title>Reportes</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../bootstrap5/css/bootstrap.css">
+        <script src="../js/jquery.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid cuadro-inicio">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="../index.html" class="btn btn-outline-primary mt-1 btn-xs">Volver a inicio</a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4 text-right">
+                    <h1>Área de Reportes</h1>
+                </div>
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="all_usuarios" autocomplete="off" checked data-codigo="all_usuarios">
+                        <label class="btn btn-outline-primary" for="all_usuarios" >Todos los Usuarios</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="usuarios_hoy" autocomplete="off" data-codigo="usuarios_hoy">
+                        <label class="btn btn-outline-primary" for="usuarios_hoy">Usuarios Registrados Hoy</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="usuarios_ayer" autocomplete="off" data-codigo="usuarios_ayer">
+                        <label class="btn btn-outline-primary" for="usuarios_ayer">Usuarios Registrados Ayer</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table></table>
+                </div>
+            </div>
+        </div>
+
+        <script src="../bootstrap5/js/bootstrap.js"></script>
+        <script src="../js/script_reportes.js"></script>
+    </body>
+</html>

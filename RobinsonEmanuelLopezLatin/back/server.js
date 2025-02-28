@@ -71,6 +71,68 @@ app.post("/guardar_usuario",(req, res)=>{
 
 });
 
+
+app.post("/ejecutar_reporte/:reporte",(req, res)=>{
+    const {reporte}=req.params;
+
+    if(!reporte){//valida si existe el codigo
+        return res.status(500).json({status:'Error', datos:'Ocurrio un error inesperado.'});
+    }
+
+    switch(reporte){
+        case "all_usuarios"://ingresa al reporte de todos los usuarios
+            reporte_usuarios(res);
+            break;
+        case "usuarios_hoy"://ingresa al reporte de usuarios registrados hoy
+            reporte_usuariosHoy(res);
+            break;
+        case "usuarios_ayer":// entra al reporte de usuarios registrados ayer
+            reporte_usuariosAyer(res);
+            break;
+        default:
+            res.status(500).json({status: 'error', datos:'Ocurrio un error inesperado'});
+    }
+
+});
+
+
+const reporte_usuarios=(res)=>{//usuarios registrados
+    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id";
+    let param = [];
+    db.query(query,param,(err, result)=>{
+        if(err){
+            console.error('error al ejecutar el reporte', err);
+            return res.status(500).json({status:'error', datos:'Error al ejecutar el reporte'});
+        }
+        res.json({status:'ok', datos:result});
+    });
+};
+
+const reporte_usuariosHoy=(res)=>{//usuarios registrados hoy
+    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion)=CURDATE()";
+   
+    db.query(query, (err, result)=>{
+        if(err){
+            console.error('Error al ejecutar el reporte de usuarios Hoy.');
+            return res.status(500).json({status:'error', datos:'Error al ejecutar el reporte de usuarios Hoy'});
+        }
+        res.json({status:'ok', datos:result});
+    });
+};
+
+const reporte_usuariosAyer=(res)=>{//usuarios registrados ayer
+    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion)=CURDATE()- 1 DAY";
+
+    db.query(query, (err, resultado)=>{
+        if(err){
+            console.error('error al ejecutar el reporte usuarios ayer');
+            return res.status(500).json({status:'error', datos:result});
+        }
+        res.json({status:'ok', datos: result});
+    });
+};;
+
+
 app.listen(PORT, ()=>{
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
