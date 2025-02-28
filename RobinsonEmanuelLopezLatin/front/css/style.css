@@ -30,3 +30,12 @@ h1{
 .icon-menu:hover{
     color: goldenrod;
 }
+.formulario-div{
+    background: #ededed;
+    border-radius: 10px;
+    padding: 10px;
+}
+.icon-registro{
+    color: #c5c5c5;
+    font-size: 110px;
+}
