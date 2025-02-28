@@ -29,3 +29,19 @@ INSERT INTO `estadousuario` (`id`, `titulo`, `clave`) VALUES (NULL, 'Activo', 'a
 
 
 ***** SERIE 4 *****
+
+***** SERIE 7 *****
+
+//agregamos el usuario de baja
+INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Carlos', '05-11-1998', '85456958', 'carlos@hotmail.com', '2025-02-28 10:19:29', '2')
+
+//se insertan los dos usuarios con fecha de registro de ayer
+INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Robinson', '2000-01-15 12:25:08', '45214521', 'robinson@robin.com', '2025-02-27 12:25:08', '');
+
+INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Erick', '1998-02-18 12:27:23', '52525252', 'erick@hotmail.com', '2025-02-27 12:27:23', '');
+
+//correr las siguientes querys para editar el tipo de dato en fecha y creacion
+ALTER TABLE `usuario` CHANGE `fecha` `fecha` DATE NOT NULL;
+ALTER TABLE `usuario` CHANGE `creacion` `creacion` DATE NOT NULL;
+
+***** SERIE 7 *****

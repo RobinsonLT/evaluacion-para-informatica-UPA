@@ -93,7 +93,7 @@ $(document).ready(function(){
             data:JSON.stringify(formData),
             contentType: "application/json",
             beforeSend:function(){
-                $('#guardar_usuario').val('Guardando...');
+                $('#guardar_usuario').html('Guardando...');
                 $('#guardar_usuario').prop('disabled',true);
             },success:function(data){
                 if(data.status=='ok'){
@@ -103,7 +103,7 @@ $(document).ready(function(){
                     alert('Error:'+data.mensaje);
                 }
                 $('#guardar_usuario').prop('disabled',false);
-                //$('#guardar_usuario').val('Guardar Usuario');
+                $('#guardar_usuario').html('Guardar Usuario');
             }
         });
     });

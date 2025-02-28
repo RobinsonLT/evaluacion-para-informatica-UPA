@@ -57,7 +57,7 @@ app.post("/guardar_usuario",(req, res)=>{
         let estado=1;//estado activo
         let fecha_actual=new Date();
 
-        const query='INSERT INTO usuario (nombre, fecha, telefono, correo, creacion, EstadoUsuarioid) VALUES ("'+name+'","'+fecha_nacimiento+'","'+telefono+'","'+correo+'","'+fecha_actual+'","'+estado+'")';
+        const query='INSERT INTO usuario (nombre, fecha, telefono, correo, creacion, EstadoUsuarioid) VALUES ("'+name+'",DATE_FORMAT("'+fecha_nacimiento+'", "%Y-%m-%d %H:%i:%s"),"'+telefono+'","'+correo+'",NOW(),"'+estado+'")';
 
         db.query(query,(err, result)=>{
             if(err){
@@ -97,7 +97,7 @@ app.post("/ejecutar_reporte/:reporte",(req, res)=>{
 
 
 const reporte_usuarios=(res)=>{//usuarios registrados
-    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id";
+    let query="SELECT usuario.*, estadousuario.titulo , DATE_FORMAT(usuario.fecha, '%d/%m/%Y') AS fecha_format, DATE_FORMAT(usuario.creacion, '%d/%m/%Y') AS creacion_format FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id";
     let param = [];
     db.query(query,param,(err, result)=>{
         if(err){
@@ -109,7 +109,7 @@ const reporte_usuarios=(res)=>{//usuarios registrados
 };
 
 const reporte_usuariosHoy=(res)=>{//usuarios registrados hoy
-    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion)=CURDATE()";
+    let query="SELECT usuario.*, estadousuario.titulo , DATE_FORMAT(usuario.fecha, '%d/%m/%Y') AS fecha_format, DATE_FORMAT(usuario.creacion, '%d/%m/%Y') AS creacion_format FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion)=CURDATE()";
    
     db.query(query, (err, result)=>{
         if(err){
@@ -121,9 +121,9 @@ const reporte_usuariosHoy=(res)=>{//usuarios registrados hoy
 };
 
 const reporte_usuariosAyer=(res)=>{//usuarios registrados ayer
-    let query="SELECT * FROM usuario INNER JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion)=CURDATE()- 1 DAY";
+    let query="SELECT usuario.*, estadousuario.titulo , DATE_FORMAT(usuario.fecha, '%d/%m/%Y') AS fecha_format, DATE_FORMAT(usuario.creacion, '%d/%m/%Y') AS creacion_format FROM usuario LEFT JOIN estadousuario ON usuario.EstadoUsuarioid=estadousuario.id WHERE DATE(creacion) = CURDATE()- INTERVAL 1 DAY";
 
-    db.query(query, (err, resultado)=>{
+    db.query(query, (err, result)=>{
         if(err){
             console.error('error al ejecutar el reporte usuarios ayer');
             return res.status(500).json({status:'error', datos:result});
