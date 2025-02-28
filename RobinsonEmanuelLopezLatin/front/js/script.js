@@ -18,18 +18,18 @@ $(document).ready(function(){
 
     /*limpiar datos del form*/
     function limpiar(){
-        $('input[name=input-name]').val('');
-        $('input[name=input-fecha-nacimiento]').val('');
-        $('input[name=input-edad]').val('0');
-        $('input[name=input-telefono]').val('');
-        $('input[name=input-correo]').val('');
+        $('input[name=name]').val('');
+        $('input[name=fecha_nacimiento]').val('');
+        $('input[name=edad]').val('0');
+        $('input[name=telefono]').val('');
+        $('input[name=correo]').val('');
     }
     /*limpiar datos del form */
 
     function valiida_form(){
 
         //valida si el nombre solo contiene a-zA-Z
-        let name=$('input[name=input-name]').val();
+        let name=$('input[name=name]').val();
         let letras=/^[a-zA-Z]+$/;
         if(!letras.test(name) || name==''){
             alert('El campo nombre solo se permite usar mayusculas o minusculas');
@@ -39,7 +39,7 @@ $(document).ready(function(){
 
         //valida si solo tiene numeros 0-9
         let numeros=/^[0-9]+$/;
-        let tel=$('input[name=input-telefono]').val();
+        let tel=$('input[name=telefono]').val();
         if(!numeros.test(tel) || tel==''){
             alert('El campo teléfono solo puede contar con digitos del 0-9.');
             return;
@@ -48,7 +48,7 @@ $(document).ready(function(){
 
         //validar correo correcto
         let val_correo=new RegExp('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}');
-        let correo_e=$('input[name=input-correo]').val();
+        let correo_e=$('input[name=correo]').val();
 
         if(!val_correo.test(correo_e) || correo_e==''){
             alert('el campo correo es requerido y solo permite un correo electronico real.');
@@ -57,7 +57,7 @@ $(document).ready(function(){
         //validar correo correcto
 
         //valida edad
-        let edad=$('input[name=input-edad]').val();
+        let edad=$('input[name=edad]').val();
         if(edad<1){
             alert('La fecha de nacimiento no es valida. tienes que tener mas de 1 año de edad');
         }
@@ -66,11 +66,11 @@ $(document).ready(function(){
     }
 
     //cambio de fecha calcula edad
-    $('input[name=input-fecha-nacimiento]').on('change',function(){
+    $('input[name=fecha_nacimiento]').on('change',function(){
         let f_nacimiento=$(this).val();
         if(f_nacimiento){
             let edad=valida_edad(f_nacimiento);         
-            $('input[name=input-edad]').val(edad);
+            $('input[name=edad]').val(edad);
         }
     });
     //cambio de fecha calcula edad
@@ -79,22 +79,31 @@ $(document).ready(function(){
     $('#guardar_usuario').click(function(event){
         event.preventDefault();
         valiida_form();
-        let formData=$('#form-registro').serialize();
+        let formData={
+            name: $('input[name=name]').val(),
+            correo:$('input[name=correo]').val(),
+            fecha_nacimiento:$('input[name=fecha_nacimiento').val(),
+            edad: $('input[name=edad]').val(),
+            telefono:$('input[name=telefono]').val(),
+            correo:$('input[name=correo]').val()
+        };
         $.ajax({
             type:'POST',
-            url:'',//url pendiente creacion del archivo
-            data:formData,
+            url:'http://localhost:3000/guardar_usuario',//url pendiente creacion del archivo
+            data:JSON.stringify(formData),
+            contentType: "application/json",
             beforeSend:function(){
                 $('#guardar_usuario').val('Guardando...');
                 $('#guardar_usuario').prop('disabled',true);
             },success:function(data){
-                if(data){
+                if(data.status=='ok'){
                     limpiar();
+                    alert('Listo:'+data.mensaje);
                 }else{
-                    alert('Error: no fue posible guardar los datos del usuario nuevo');
+                    alert('Error:'+data.mensaje);
                 }
                 $('#guardar_usuario').prop('disabled',false);
-                $('#guardar_usuario').val('Guardar Usuario');
+                //$('#guardar_usuario').val('Guardar Usuario');
             }
         });
     });

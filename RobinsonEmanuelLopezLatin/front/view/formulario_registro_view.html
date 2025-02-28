@@ -12,6 +12,11 @@
 <body>
     <div class="container-fluid cuadro-inicio">
         <div class="row">
+            <div class="col-md-3">
+                <a href="../index.html" class="btn btn-outline-primary mt-1 btn-xs">Volver a inicio</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6 text-center mt-5">
                 <i class="bi bi-person-fill-add icon-registro"></i>
                 <h1>Formulario de Registro</h1>
@@ -22,15 +27,15 @@
                     <br>
                     <form id="form-registro">
                         <label for="input-name">Nombre de Usuario (*):</label>
-                        <input type="text" class="form-control" id="input-name" name="input-name" required>
+                        <input type="text" class="form-control" id="input-name" name="name" required>
                         <label for="input-fecha-nacimiento">Fecha de nacimiento (*):</label>
-                        <input type="date" class="form-control" id="input-fecha-nacimiento" name="input-fecha-nacimiento">
-                        <label for="input-edad">Edad:</label>
-                        <input type="number" class="form-control" id="input-edad" name="input-edad" value="0" disabled>
+                        <input type="date" class="form-control" id="input-fecha-nacimiento" name="fecha_nacimiento">
+                        <label for="edad">Edad:</label>
+                        <input type="number" class="form-control" id="input-edad" name="edad" value="0" disabled>
                         <label for="input-telefono">Número de teléfono (*):</label>
-                        <input type="number" class="form-control" id="input-telefono" name="input-telefono" required>
+                        <input type="number" class="form-control" id="input-telefono" name="telefono" required>
                         <label for="input-correo">Correo Electrónico (*):</label>
-                        <input type="email" class="form-control" id="input-correo" name="input-correo" required>
+                        <input type="email" class="form-control" id="input-correo" name="correo" required>
                         <br>
                         <button class="btn btn-success btn-lg" id="guardar_usuario">Guardar Usuario</button>
                     </form>
