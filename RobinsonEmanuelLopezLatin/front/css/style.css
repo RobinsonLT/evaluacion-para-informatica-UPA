@@ -1,0 +1,32 @@
+h1{
+    font-family: monospace;
+}
+.cuadro-inicio{
+    height: 100vh;
+    border-bottom: 25px solid #4aad45;
+    border-top: 25px solid #164479;
+}
+.borde-azul{
+    border-right: 2px solid #164479;
+}
+.borde-verde{
+    border-right: 2px solid #4aad45;
+}
+.carta-formulario{
+    text-align: center;
+    border-left: 2px solid #164479;
+}
+.carta-reporte{
+    text-align: center;
+    border-left: 2px solid #4aad45;
+}
+.carta-formulario:hover, .carta-reporte:hover{
+    margin-bottom: 5px;
+}
+.icon-menu{
+    font-size: 50px;
+    color:darkgrey;
+}
+.icon-menu:hover{
+    color: goldenrod;
+}
