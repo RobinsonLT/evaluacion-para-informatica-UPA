@@ -10,7 +10,7 @@ const PORT=3000;
 const db=mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'',
+    password:'Ujsd#hfQ@s_15',
     database:'evaluacion_robinson'
 });
 //se verifica la conexion

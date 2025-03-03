@@ -7,10 +7,10 @@ CREATE DATABASE `evaluacion_robinson` /*!40100 DEFAULT CHARACTER SET utf8mb4 */
 CREATE TABLE `usuario` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `nombre` varchar(200) NOT NULL,
- `fecha` datetime NOT NULL,
+ `fecha` date NOT NULL,
  `telefono` int(11) NOT NULL,
  `correo` varchar(100) NOT NULL,
- `creacion` datetime NOT NULL,
+ `creacion` date NOT NULL,
  `EstadoUsuarioid` int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
@@ -33,15 +33,16 @@ INSERT INTO `estadousuario` (`id`, `titulo`, `clave`) VALUES (NULL, 'Activo', 'a
 ***** SERIE 7 *****
 
 //agregamos el usuario de baja
-INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Carlos', '05-11-1998', '85456958', 'carlos@hotmail.com', '2025-02-28 10:19:29', '2')
+INSERT INTO usuario(nombre, fecha, telefono, correo, creacion, EstadoUsuarioid) values ('Carlos', '2005-02-05', 52524152, 'carlos@gmail.com','2025-03-06', 2)
 
 //se insertan los dos usuarios con fecha de registro de ayer
-INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Robinson', '2000-01-15 12:25:08', '45214521', 'robinson@robin.com', '2025-02-27 12:25:08', '');
+INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Robinson', '2000-01-15', '45214521', 'robinson@robin.com', '2025-02-27', '');
 
-INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Erick', '1998-02-18 12:27:23', '52525252', 'erick@hotmail.com', '2025-02-27 12:27:23', '');
+INSERT INTO `usuario` (`id`, `nombre`, `fecha`, `telefono`, `correo`, `creacion`, `EstadoUsuarioid`) VALUES (NULL, 'Erick', '1998-02-18', '52525252', 'erick@hotmail.com', '2025-02-27', '1');
 
 //correr las siguientes querys para editar el tipo de dato en fecha y creacion
 ALTER TABLE `usuario` CHANGE `fecha` `fecha` DATE NOT NULL;
 ALTER TABLE `usuario` CHANGE `creacion` `creacion` DATE NOT NULL;
 
 ***** SERIE 7 *****
+
