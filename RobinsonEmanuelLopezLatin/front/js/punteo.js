@@ -27,21 +27,30 @@ $(document).ready(function(){
         if(validador=='ok'){
             let correo=$('input[name=correo]').val();
             let punteo=$('input[name=punteo]').val();
-            let dataForm={
-                'correo': correo,
-                'punteo':punteo
-            }
+
+            let formData={                
+                correo:$('input[name=correo]').val(),
+                punteo: $('input[name=punteo]').val()
+            };
+
+            console.log(JSON.stringify(formData));
             $.ajax({
-                url:'',
-                dataType:'json',
-                data:json.stringfy(dataForm),
+                url:'http://localhost:3000/guardar_punteo',
+                type:'post',
+                data:JSON.stringify(formData),
+                contentType: "application/json",
                 beforeSend:function(){
+                    toastr.warning('Procesando ....');
                     $('#guardar_punteo').html('Guardando...');
                     $('#guardar_punteo').prop('disabled',true);
                 },
                 success:function(data){
-                    if(data.status='ok'){
+                    console.log(data);
+                    if(data.status=='ok'){
+                        toastr.success(data.datos);
                         limpiar();
+                    }else{
+                        toastr.error(data.datos);
                     }
                     $('#guardar_punteo').prop('disabled', false);
                     $('#guardar_punteo').html('Guardar Punteo');

@@ -89,9 +89,49 @@ app.post("/ejecutar_reporte/:reporte",(req, res)=>{
         case "usuarios_ayer":// entra al reporte de usuarios registrados ayer
             reporte_usuariosAyer(res);
             break;
+        
         default:
             res.status(500).json({status: 'error', datos:'Ocurrio un error inesperado'});
     }
+
+});
+
+app.post('/guardar_punteo',(req, res)=>{
+    const {correo, punteo}=req.body;
+    console.log('este correo'+punteo);
+    let val_correo=new RegExp('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}');
+
+    if(!val_correo.test(correo) || correo==''){
+        return res.json({status:'Error', datos:'El dato del correo no fue encontrado o es erroneo '+correo});  
+    }
+    if(Number.isNaN(punteo) || punteo<1 || punteo>100){
+        return res.json({status:'Error', datos:'El dato del numero no fue encontrado o es mayor a 100 y menor a 1'});  
+    }
+
+    let query="SELECT id, nombre FROM usuario WHERE correo LIKE '"+correo+"' Limit 1";
+    db.query(query,(err, result)=>{
+        if(err){
+            return res.json({status:'Error', datos:'El correo no existe en la base de datos'});
+        }
+        
+        
+        let id=result[0].id;
+        let nombre=result[0].nombre;
+        let insert=`INSERT INTO punteo_usuario(id, punteo, ingreso) VALUE ("${id}",${Number(punteo)}, NOW())`;
+        db.query(insert,(err, result)=>{
+            if(err){
+                return res.json({status:'Error', datos:'Error al insertar el punteo '+insert});
+
+            }
+            let select_notas="SELECT id, SUM(punteo) as nota FROM punteo_usuario WHERE id="+id+" GROUP BY id";
+            db.query(select_notas,(err, result)=>{
+                if(err){
+                    return res.json({status:'Error', datos:'Error al enlistar las notas '+select_notas});
+                }
+                return res.json({status:'ok', datos:'Usuario: '+id+' Nombre: '+nombre+' Nota total: '+result[0].nota});
+            });
+        });
+    });
 
 });
 

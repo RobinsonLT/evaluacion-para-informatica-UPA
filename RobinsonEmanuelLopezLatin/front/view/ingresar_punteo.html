@@ -12,6 +12,11 @@
 <body>
     <div class="container-fluid cuadro-inicio">
         <div class="row">
+            <div class="col-md-3">
+                <a href="../index.html" class="btn btn-outline-primary mt-1 btn-xs">Volver a inicio</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 text-center">
                 <h1>Ingresar Punteo</h1>
             </div>
@@ -20,12 +25,12 @@
                 <div class="form-punteo">
                     <form>
                         <div class="input-goup">
-                            <label for="correo">Correo Usuario:</label>
+                            <label for="correo">Correo Usuario(*):</label>
                             <input type="email" class="form-control" id="correo" name="correo" required>
                         </div>
                         <div class="input-goup">
-                            <label for="puntero" class="">Punteo:</label>
-                            <input type="number" class="form-control" id="puntero" name="puntero" min="1" max="100" value="1" required>
+                            <label for="punteo" class="">Punteo(*):</label>
+                            <input type="number" class="form-control" id="punteo" name="punteo" min="1" max="100" value="1" required>
                         </div>
                         <br>
                         <button class="btn btn-success" id="guardar_punteo">Guardar Punteo</button>
