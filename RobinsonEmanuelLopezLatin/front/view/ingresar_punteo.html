@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Punteo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../bootstrap5/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+    <div class="container-fluid cuadro-inicio">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Ingresar Punteo</h1>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-punteo">
+                    <form>
+                        <div class="input-goup">
+                            <label for="correo">Correo Usuario:</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
+                        </div>
+                        <div class="input-goup">
+                            <label for="puntero" class="">Punteo:</label>
+                            <input type="number" class="form-control" id="puntero" name="puntero" min="1" max="100" value="1" required>
+                        </div>
+                        <br>
+                        <button class="btn btn-success" id="guardar_punteo">Guardar Punteo</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    <script src="../bootstrap5/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="../js/punteo.js"></script>
+</body>
+</html>

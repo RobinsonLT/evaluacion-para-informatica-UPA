@@ -39,3 +39,9 @@ h1{
     color: #c5c5c5;
     font-size: 110px;
 }
+.form-punteo{
+    border:2px solid #eee;
+    background:#ededed;
+    padding: 10px;
+    border-radius:8px;
+}
